@@ -6,7 +6,7 @@ import { Gallery } from '../ImageGallery/ImageGallery';
 import { Pagination } from '../LoadMore/LoadMore';
 import { Wrapper } from './App.styled'
 import { Loader } from '../Loader/Loader'
-import {notifyInfo, notifyInputQuerry, success} from '../Notify/notify'
+
 
 
 
@@ -51,10 +51,10 @@ export class App extends Component {
         this.setState(prevState => ({
           images: this.state.page > 1 ? [...prevState.images, ...img] : img,
         }));
-        success(searchQuery);
+        
         this.setState({ loading: false });
       } else {
-        notifyInfo();
+       
         this.setState({ loading: false });
       }
     } catch (error) {
@@ -66,7 +66,7 @@ export class App extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     if (evt.target.elements.query.value.trim() === '') {
-      notifyInputQuerry();
+     
       return;
     }
     this.changeQuery(evt.target.elements.query.value);
