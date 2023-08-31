@@ -83,13 +83,15 @@ export class App extends Component {
   
 
   render () {
-    const { loading, images } = this.state;
+    const { loading, images, totalHits } = this.state;
+    const hasMoreImages = images.length < totalHits;
     return (
       <Wrapper>
         <Searchbar onSubmit={ this.handleSubmit } />
         { loading && <Loader /> }
         { images.length > 0 && <Gallery imgItems={ images } /> } 
-        { images.length > 0 && <Pagination onClick={ this.handleLoadMore }>Load More</Pagination> }
+        {hasMoreImages && images.length> 0 &&(
+          <Pagination onClick={this.handleLoadMore}>Load More</Pagination>)}
         <Toaster position="top-right" reverseOrder={true}/>
       </Wrapper>
     )
