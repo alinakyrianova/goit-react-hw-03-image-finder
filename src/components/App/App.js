@@ -33,23 +33,24 @@ export class App extends Component {
     const prevQuery = prevState.query;
     const searchQuery = this.state.query;
     const prevPage = prevState.page;
-    const nexPage = this.state.page;
+    const nextPage = this.state.page;
 
-    if (prevQuery !== searchQuery || prevPage !== nexPage) {
+    if (prevQuery !== searchQuery || prevPage !== nextPage) {
       this.loadResult();
     }
   };
 
   loadResult = async () => {
     const searchQuery = this.state.query;
-    const nexPage = this.state.page;
+    const nextPage = this.state.page;
 
     try {
       this.setState({ loading: true });
-      const img = await fetchImages(searchQuery, nexPage);
-      if (img.length) {
+      const { images, totalHits } = await fetchImages(searchQuery, nextPage);
+      if (images && images.length) {
         this.setState(prevState => ({
-          images: this.state.page > 1 ? [...prevState.images, ...img] : img,
+          images: nextPage > 1 ? [...prevState.images, ...images] : images,
+          totalHits: totalHits,
         }));
         
         this.setState({ loading: false });
@@ -84,13 +85,13 @@ export class App extends Component {
 
   render () {
     const { loading, images, totalHits } = this.state;
-    const hasMoreImages = images.length < totalHits;
+    const hasMoreImages = images.length >0 && images.length < totalHits;
     return (
       <Wrapper>
         <Searchbar onSubmit={ this.handleSubmit } />
         { loading && <Loader /> }
         { images.length > 0 && <Gallery imgItems={ images } /> } 
-        {hasMoreImages && images.length> 0 &&(
+        {hasMoreImages &&(
           <Pagination onClick={this.handleLoadMore}>Load More</Pagination>)}
         <Toaster position="top-right" reverseOrder={true}/>
       </Wrapper>
