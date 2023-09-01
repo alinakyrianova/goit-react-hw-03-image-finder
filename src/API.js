@@ -23,7 +23,7 @@ console.log('query:', query);
 console.log('response.data.hits:', response.data.hits);
 
 
-    return response.data.hits;
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;

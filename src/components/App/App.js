@@ -46,10 +46,10 @@ export class App extends Component {
 
     try {
       this.setState({ loading: true });
-      const { images, totalHits } = await fetchImages(searchQuery, nextPage);
-      if (images && images.length) {
+      const { hits, totalHits } = await fetchImages(searchQuery, nextPage);
+      if (hits && hits.length) {
         this.setState(prevState => ({
-          images: nextPage > 1 ? [...prevState.images, ...images] : images,
+          images: [...prevState.images, ...hits],
           totalHits: totalHits,
         }));
         
