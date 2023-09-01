@@ -33,6 +33,10 @@ export class GalleryImage extends Component {
 
   render() {
     const { webformatURL, tags, largeImageURL } = this.props.item;
+    console.log('webformatURL:', webformatURL);
+    console.log('tags:', tags);
+    console.log('largeImageURL:', largeImageURL);
+
     const { isModalOpen } = this.state;
     return (
       <div>
