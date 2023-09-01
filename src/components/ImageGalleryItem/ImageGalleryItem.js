@@ -39,7 +39,7 @@ export class GalleryImage extends Component {
         <ImageGalleryItemImg
           src={webformatURL}
           alt={tags}
-          load="lazy"
+          /*loading="lazy"*/
           onClick={this.openModal}
         />
         <Modal
